@@ -10,17 +10,28 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as DonateRouteImport } from './routes/donate'
 import { Route as FoodRescueRouteImport } from './routes/food-rescue'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as VolunteerRouteImport } from './routes/volunteer'
+import { Route as AuthenticatedAppIndexRouteImport } from './routes/_authenticated/app.index'
+import { Route as AuthenticatedAppProviderRouteImport } from './routes/_authenticated/app.provider'
+import { Route as AuthenticatedAppReportRouteImport } from './routes/_authenticated/app.report'
+import { Route as AuthenticatedAppVolunteerRouteImport } from './routes/_authenticated/app.volunteer'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -28,9 +39,19 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DonateRoute = DonateRouteImport.update({
+  id: '/donate',
+  path: '/donate',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FoodRescueRoute = FoodRescueRouteImport.update({
@@ -58,75 +79,138 @@ const VolunteerRoute = VolunteerRouteImport.update({
   path: '/volunteer',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAppIndexRoute = AuthenticatedAppIndexRouteImport.update({
+  id: '/app/',
+  path: '/app/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAppProviderRoute =
+  AuthenticatedAppProviderRouteImport.update({
+    id: '/app/provider',
+    path: '/app/provider',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAppReportRoute = AuthenticatedAppReportRouteImport.update({
+  id: '/app/report',
+  path: '/app/report',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAppVolunteerRoute =
+  AuthenticatedAppVolunteerRouteImport.update({
+    id: '/app/volunteer',
+    path: '/app/volunteer',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/donate': typeof DonateRoute
   '/food-rescue': typeof FoodRescueRoute
   '/how-it-works': typeof HowItWorksRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/volunteer': typeof VolunteerRoute
+  '/app/provider': typeof AuthenticatedAppProviderRoute
+  '/app/report': typeof AuthenticatedAppReportRoute
+  '/app/volunteer': typeof AuthenticatedAppVolunteerRoute
+  '/app/': typeof AuthenticatedAppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/donate': typeof DonateRoute
   '/food-rescue': typeof FoodRescueRoute
   '/how-it-works': typeof HowItWorksRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/volunteer': typeof VolunteerRoute
+  '/app/provider': typeof AuthenticatedAppProviderRoute
+  '/app/report': typeof AuthenticatedAppReportRoute
+  '/app/volunteer': typeof AuthenticatedAppVolunteerRoute
+  '/app': typeof AuthenticatedAppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/donate': typeof DonateRoute
   '/food-rescue': typeof FoodRescueRoute
   '/how-it-works': typeof HowItWorksRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/volunteer': typeof VolunteerRoute
+  '/_authenticated/app/provider': typeof AuthenticatedAppProviderRoute
+  '/_authenticated/app/report': typeof AuthenticatedAppReportRoute
+  '/_authenticated/app/volunteer': typeof AuthenticatedAppVolunteerRoute
+  '/_authenticated/app/': typeof AuthenticatedAppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/auth'
     | '/contact'
+    | '/donate'
     | '/food-rescue'
     | '/how-it-works'
     | '/privacy'
     | '/terms'
     | '/volunteer'
+    | '/app/provider'
+    | '/app/report'
+    | '/app/volunteer'
+    | '/app/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/auth'
     | '/contact'
+    | '/donate'
     | '/food-rescue'
     | '/how-it-works'
     | '/privacy'
     | '/terms'
     | '/volunteer'
+    | '/app/provider'
+    | '/app/report'
+    | '/app/volunteer'
+    | '/app'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/about'
+    | '/auth'
     | '/contact'
+    | '/donate'
     | '/food-rescue'
     | '/how-it-works'
     | '/privacy'
     | '/terms'
     | '/volunteer'
+    | '/_authenticated/app/provider'
+    | '/_authenticated/app/report'
+    | '/_authenticated/app/volunteer'
+    | '/_authenticated/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
+  AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
+  DonateRoute: typeof DonateRoute
   FoodRescueRoute: typeof FoodRescueRoute
   HowItWorksRoute: typeof HowItWorksRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -143,6 +227,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -150,11 +241,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/donate': {
+      id: '/donate'
+      path: '/donate'
+      fullPath: '/donate'
+      preLoaderRoute: typeof DonateRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/food-rescue': {
@@ -192,13 +297,61 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VolunteerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/app/': {
+      id: '/_authenticated/app/'
+      path: '/app'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AuthenticatedAppIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/app/provider': {
+      id: '/_authenticated/app/provider'
+      path: '/app/provider'
+      fullPath: '/app/provider'
+      preLoaderRoute: typeof AuthenticatedAppProviderRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/app/report': {
+      id: '/_authenticated/app/report'
+      path: '/app/report'
+      fullPath: '/app/report'
+      preLoaderRoute: typeof AuthenticatedAppReportRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/app/volunteer': {
+      id: '/_authenticated/app/volunteer'
+      path: '/app/volunteer'
+      fullPath: '/app/volunteer'
+      preLoaderRoute: typeof AuthenticatedAppVolunteerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAppProviderRoute: typeof AuthenticatedAppProviderRoute
+  AuthenticatedAppReportRoute: typeof AuthenticatedAppReportRoute
+  AuthenticatedAppVolunteerRoute: typeof AuthenticatedAppVolunteerRoute
+  AuthenticatedAppIndexRoute: typeof AuthenticatedAppIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAppProviderRoute: AuthenticatedAppProviderRoute,
+  AuthenticatedAppReportRoute: AuthenticatedAppReportRoute,
+  AuthenticatedAppVolunteerRoute: AuthenticatedAppVolunteerRoute,
+  AuthenticatedAppIndexRoute: AuthenticatedAppIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
+  AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
+  DonateRoute: DonateRoute,
   FoodRescueRoute: FoodRescueRoute,
   HowItWorksRoute: HowItWorksRoute,
   PrivacyRoute: PrivacyRoute,
