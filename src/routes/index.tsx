@@ -34,7 +34,7 @@ const WAYS = [
   { icon: Building2, title: "Partner as an NGO", body: "Community organisations can coordinate distribution through AnnaSetu.", to: "/about" as const },
 ];
 
-const FAQ = [
+const FAQ: [string, string][] = [
   ["Who can report a food need?", "Anyone — an individual, a neighbour, or a community worker. Every report is reviewed by an authorised team member before it is acted on."],
   ["How do you keep donated food safe?", "Providers declare preparation time, storage and allergens. A food-safety reviewer checks each listing before it can be matched, and listings expire automatically at their pickup deadline."],
   ["Are online donations live?", "Not yet. Payments are in demonstration mode until a verified payment provider is connected. No money is collected and no receipts are issued in demo mode."],
